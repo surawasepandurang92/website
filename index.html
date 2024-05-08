@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header">
+        <h1>Movie Recommendations</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <p>Welcome to our movie recommendation website!</p>
+        <a href="#allMovies" class="ui-btn">View All Movies</a>
+    </div>
+</div>
+
+<div data-role="page" id="allMovies">
+    <div data-role="header">
+        <a href="#home" class="ui-btn ui-btn-left ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>All Movies</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <ul data-role="listview" data-inset="true" id="movieList">
+            <!-- Movie items will be added here dynamically -->
+        </ul>
+    </div>
+</div>
+
+<div data-role="page" id="movieDetails">
+    <div data-role="header">
+        <a href="#allMovies" class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left">Back</a>
+        <h1>Movie Details</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <div id="movieDetail">
+            <!-- Movie details will be added here dynamically -->
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("pagecreate", "#allMovies", function () {
+        var movies = [
+            { title: "Inception", director: "Christopher Nolan", year: 2010 },
+            { title: "The Shawshank Redemption", director: "Frank Darabont", year: 1994 },
+            { title: "The Godfather", director: "Francis Ford Coppola", year: 1972 },
+            { title: "Pulp Fiction", director: "Quentin Tarantino", year: 1994 },
+            { title: "The Dark Knight", director: "Christopher Nolan", year: 2008 }
+        ];
+
+        var $movieList = $('#movieList');
+        $movieList.empty();
+        $.each(movies, function (index, movie) {
+            $movieList.append('<li><a href="#movieDetails" data-transition="slide">' + movie.title + '</a></li>');
+        });
+        $movieList.listview('refresh');
+
+        $('#movieList a').on('click', function () {
+            var movieIndex = $(this).parent().index();
+            var movie = movies[movieIndex];
+            $('#movieDetail').html('<h2>' + movie.title + '</h2><p><strong>Director:</strong> ' + movie.director + '</p><p><strong>Year:</strong> ' + movie.year + '</p>');
+        });
+    });
+</script>
+
+</body>
+</html> 

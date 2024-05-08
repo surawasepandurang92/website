@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header">
+            <h1>Movie Recommendations</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <ul data-role="listview" data-inset="true" id="movieList">
+                <!-- Movie items will be added here dynamically -->
+            </ul>
+        </div>
+        <script>
+            $(document).on("pagecreate", function () {
+                var movies = [
+                    { title: "Inception", director: "Christopher Nolan", year: 2010 },
+                    { title: "The Shawshank Redemption", director: "Frank Darabont", year: 1994 },
+                    { title: "The Godfather", director: "Francis Ford Coppola", year: 1972 },
+                    { title: "Pulp Fiction", director: "Quentin Tarantino", year: 1994 },
+                    { title: "The Dark Knight", director: "Christopher Nolan", year: 2008 }
+                ];
+    
+                var $movieList = $('#movieList');
+                $.each(movies, function (index, movie) {
+                    $movieList.append('<li><h2>' + movie.title + '</h2><p><strong>Director:</strong> ' + movie.director + '</p><p><strong>Year:</strong> ' + movie.year + '</p></li>');
+                });
+                $movieList.listview('refresh');
+            });
+        </script>
+</div>
+</body>
+</html>       
